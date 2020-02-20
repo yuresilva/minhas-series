@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 import Header from "./components/base/Header";
-import Generos from "./generos";
+import Generos from "./Generos";
+import Series from "./Series";
 import NovoGeneros from "./services/NovoGeneros";
 import EditarGenero from "./services/EditarGenero";
+import NovaSerie from "./services/NovaSerie";
+import InfoSerie from "./services/InfoSerie";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -13,13 +15,6 @@ const Home = () => {
 };
 
 function App() {
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    axios.get("/api").then(res => {
-      setData(res.data);
-    });
-  }, []);
   return (
     <Router>
       <div>
@@ -29,8 +24,10 @@ function App() {
           <Route path="/generos" exact component={Generos} />
           <Route path="/generos/novo" exact component={NovoGeneros} />
           <Route path="/generos/:id" exact component={EditarGenero} />
+          <Route path="/series" exact component={Series} />
+          <Route path="/series/novo" exact component={NovaSerie} />
+          <Route path="/series/:id" exact component={InfoSerie} />
         </Switch>
-        <p>{JSON.stringify(data)}</p>
       </div>
     </Router>
   );
